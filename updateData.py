@@ -49,7 +49,14 @@ def getMeetingTimes(time):
     	END_TIME = time['endTime']
 
     if(not (START_TIME == None or END_TIME == None or time['meetingDay'] == None or time['campusName'] == None or time['buildingCode'] == None or time['roomNumber'] == None)):
-        logging.info("\tFrom %s to %s on %s. On %s in %s %s" % (START_TIME, END_TIME, time['meetingDay'], time['campusName'], time['buildingCode'], time['roomNumber']))
+        # logging.info("\tFrom %s to %s on %s. On %s in %s %s" % (START_TIME, END_TIME, time['meetingDay'], time['campusName'], time['buildingCode'], time['roomNumber']))
+        log = ("\t Campus: %s Building: %s %s at %s for %s" % (time['campusName'], time['buildingCode'], time['roomNumber'], START_TIME, str(int(END_TIME) - int(START_TIME))))
+
+        addTime(time['campusName'], time['buildingCode'], time['roomNumber'], time['meetingDay'], START_TIME, END_TIME)
+
+        if(log not in uniqueLogs):
+            uniqueLogs.append(log)
+            logging.info(log)
 
 def getSubjectTimes(sub):
 
@@ -65,12 +72,48 @@ def getSubjectTimes(sub):
     for course in allCourses:
         getCourseTimes(course)
 
+def addTime(c, b, r, d, s, e):
+    global data
+
+    if(c not in data):
+        print(len(data))
+        data[c] = {}
+
+    campus = data[c]
+
+    if(b not in campus):
+        campus[b] = {}
+
+    build = campus[b]
+
+    if(r not in build):
+        build[r] = {}
+
+    room = build[r]
+
+    if(d not in room):
+        room[d] = []
+
+    day = room[d]
+
+    time = {'str' : s, 'end' : e}
+
+    if(time not in day):
+        day.append(time)
+
 
 # Start
+data = {}
+uniqueLogs = []
 LOG_FILENAME = 'import.log'
 logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, filemode='w')
 # Iterates over every subject number from 0 to 999
 for sub in range(0,999):
 
-    t = threading.Thread(target=getSubjectTimes, args=[sub])
-    t.start()
+    getSubjectTimes(sub)
+
+    # t = threading.Thread(target=getSubjectTimes, args=[sub])
+    # t.start()
+
+with open('data.json', 'w') as outfile:
+    json.dump(data, outfile)
