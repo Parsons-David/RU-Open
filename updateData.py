@@ -86,6 +86,7 @@ for sub in range(0,999):
 					# Ensures that null times are still imported
 					START_TIME = time['startTime']
 					END_TIME = time['endTime']
+
                 print "%d:%s:%s From %s to %s on %s" % (sub, course['courseNumber'], section['number'], START_TIME, END_TIME, time['meetingDay'])
 
 			# print "\t\tSection: %s" % INDEX
