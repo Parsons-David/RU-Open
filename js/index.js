@@ -26,7 +26,6 @@ class Campus{
     this.selected = false;
   }
 
-  add
 }
 
 class Building{
