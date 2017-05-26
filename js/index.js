@@ -2,7 +2,7 @@ var index;
 
 function onLoad(){
   console.log("Loading");
-  $.getJSON('http://parsonssoftware.me/RU-Open/data.json', function(data) {
+  $.getJSON('data.json', function(data) {
         index = new Page(data);
   });
   $("*").css( 'cursor', 'pointer' );
