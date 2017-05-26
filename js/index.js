@@ -1,10 +1,9 @@
 var index;
 
 function onLoad(){
-  index = new Page();
   console.log("Loading");
-  $.getJSON('data.json', function(data) {
-    alert(data);
+  $.getJSON('http://parsonssoftware.me/RU-Open/data.json', function(data) {
+        index = new Page(data);
   });
   $("*").css( 'cursor', 'pointer' );
   for (var i = 0; i < 5; i++){
@@ -26,7 +25,10 @@ function onCampusClick(pos){
 }
 
 class Page{
-  constructor(){
+  constructor(json){
+    // Stores JSON data
+    this.data = json;
+    console.log(json.BUSCH.WL["165"]);
     this.selectedCampuses = [];
     for (var i = 0; i < 5; i++) this.selectedCampuses[i] = false;
   }
