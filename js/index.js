@@ -3,6 +3,10 @@ var index;
 function onLoad(){
   index = new Page();
   console.log("Loading");
+  $.getJSON('data.json', function(data) {
+    alert(data);
+  });
+  $("*").css( 'cursor', 'pointer' );
   for (var i = 0; i < 5; i++){
     var div = document.getElementById('camp' + i);
     div.style.display = 'none';
