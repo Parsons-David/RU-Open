@@ -1,11 +1,15 @@
 var index;
+var week = ['SUN', 'M', 'T', 'W', 'TH', 'F', 'S'];
+var day;
 
 function onLoad(){
   console.log("Loading");
-  $.getJSON('http://parsonssoftware.me/RU-Open/data.json', function(data) {
+  $.getJSON('summer2017data.json', function(data) {
         index = new Page(data);
   });
   $("*").css( 'cursor', 'pointer' );
+  day = week[(new Date()).getDay()];
+  console.log(day);
 }
 
 function onClick(){
@@ -47,9 +51,10 @@ class Campus{
     this.div.style.display = 'none';
 
     for(var b in buildings){
-      $("body").data(b, new Building(b, buildings[b]))
-      this.div.append($("body").data(b).sec);
-      this.div.append($("body").data(b).div);
+      var newID = name + ' - ' + b
+      $("body").data(newID, new Building(b, buildings[b], newID))
+      this.div.append($("body").data(newID).sec);
+      this.div.append($("body").data(newID).div);
     }
 
   }
@@ -63,7 +68,7 @@ class Campus{
 }
 
 class Building{
-  constructor(name, room){
+  constructor(name, room, uniqueID){
     // Building Name (Hill Center, Loree, etc)
     this.name = name;
     // Is Building included in search
@@ -72,7 +77,7 @@ class Building{
     // Document Elements
     // Section for Campus
     this.sec = document.createElement("SECTION");
-    this.sec.id = name;
+    this.sec.id = uniqueID;
     this.sec.innerHTML = '&emsp;' + name;
     this.sec.onclick = onClick;
 
@@ -81,9 +86,10 @@ class Building{
     this.div.style.display = 'none';
 
     for(var r in room){
-      $("body").data(r, new Room(r, room[r]))
-      this.div.append($("body").data(r).sec);
-      this.div.append($("body").data(r).div);
+      var newID = uniqueID + ' - ' + r;
+      $("body").data(newID, new Room(r, room[r], newID))
+      this.div.append($("body").data(newID).sec);
+      this.div.append($("body").data(newID).div);
     }
   }
 
@@ -96,7 +102,7 @@ class Building{
 
 
 class Room{
-  constructor(name, time){
+  constructor(name, time, uniqueID){
     // Building Name (Hill Center, Loree, etc)
     this.name = name;
     // Is Building included in search
@@ -105,7 +111,7 @@ class Room{
     // Document Elements
     // Section for Campus
     this.sec = document.createElement("SECTION");
-    this.sec.id = name;
+    this.sec.id = uniqueID;
     this.sec.innerHTML = '&emsp;&emsp;' + name;
     this.sec.onclick = onClick;
 
@@ -113,12 +119,25 @@ class Room{
     this.div = document.createElement("div");
     this.div.style.display = 'none';
 
+    if(time[day] == null){
+      this.div.innerHTML =  '&emsp;&emsp;&emsp;' + "No Classes Scheduled";
+    } else {
+      this.div.innerHTML =  '&emsp;&emsp;&emsp;' + time[day].length + " classes scheduled today.";
+    }
+
   }
 
   toggleSelected(){
     this.selected = !this.selected;
     this.sec.style.color = (this.selected ? 'green' : '' );
-      console.log("Room Selected");
     this.div.style.display = (this.selected ? '' : 'none');
   }
+}
+
+class Time{
+
+  constructor(){
+
+  }
+
 }
