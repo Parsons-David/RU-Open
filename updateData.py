@@ -10,7 +10,7 @@ def getSubjectJSON(sub):
 	    strSub = '0' + str(sub)
     else :
 	    strSub = str(sub)
-    url = 'http://sis.rutgers.edu/soc/courses.json?subject=' + strSub + '&semester=12017&campus=NB&level=U'
+    url = 'http://sis.rutgers.edu/soc/courses.json?subject=' + strSub + '&semester=72017&campus=NB&level=U'
     output = None
 	# Pulls the json associated with the current subject from the Rutgers Server.
     with contextlib.closing(urllib.urlopen(url)) as response:
@@ -115,5 +115,5 @@ for sub in range(0,999):
     # t = threading.Thread(target=getSubjectTimes, args=[sub])
     # t.start()
 
-with open('data.json', 'w') as outfile:
+with open('summer2017data.json', 'w') as outfile:
     json.dump(data, outfile)
