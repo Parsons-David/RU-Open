@@ -10,7 +10,7 @@ def getSubjectJSON(sub):
 	    strSub = '0' + str(sub)
     else :
 	    strSub = str(sub)
-    url = 'http://sis.rutgers.edu/soc/courses.json?subject=' + strSub + '&semester=72017&campus=NB&level=U'
+    url = 'http://sis.rutgers.edu/soc/courses.json?subject=' + strSub + '&semester=12017&campus=NB&level=U'
     output = None
 	# Pulls the json associated with the current subject from the Rutgers Server.
     with contextlib.closing(urllib.urlopen(url)) as response:
@@ -20,14 +20,14 @@ def getSubjectJSON(sub):
 def getCourseTimes(course):
     # logging.info('\t' + course["courseNumber"])
     for sec in course["sections"]:
-        getSectionTimes(sec)
+        getSectionTimes(sec, course['title'])
 
-def getSectionTimes(section):
+def getSectionTimes(section, title):
     # logging.info('\t\t' + section["index"])
     for time in section["meetingTimes"]:
-        getMeetingTimes(time)
+        getMeetingTimes(time, title)
 
-def getMeetingTimes(time):
+def getMeetingTimes(time, title):
     if(time['startTime'] != None):
     	# Determines the whether the meeting times are AM or PM
     	if(time['pmCode'] == 'P'):
@@ -52,7 +52,7 @@ def getMeetingTimes(time):
         # logging.info("\tFrom %s to %s on %s. On %s in %s %s" % (START_TIME, END_TIME, time['meetingDay'], time['campusName'], time['buildingCode'], time['roomNumber']))
         log = ("\t Campus: %s Building: %s %s at %s for %s" % (time['campusName'], time['buildingCode'], time['roomNumber'], START_TIME, str(int(END_TIME) - int(START_TIME))))
 
-        addTime(time['campusName'], time['buildingCode'], time['roomNumber'], time['meetingDay'], START_TIME, END_TIME)
+        addTime(time['campusName'], time['buildingCode'], time['roomNumber'], time['meetingDay'], START_TIME, END_TIME, title)
 
         if(log not in uniqueLogs):
             uniqueLogs.append(log)
@@ -72,7 +72,7 @@ def getSubjectTimes(sub):
     for course in allCourses:
         getCourseTimes(course)
 
-def addTime(c, b, r, d, s, e):
+def addTime(c, b, r, d, s, e, t):
     global data
 
     if(c not in data):
@@ -96,7 +96,7 @@ def addTime(c, b, r, d, s, e):
 
     day = room[d]
 
-    time = {'str' : s, 'end' : e}
+    time = {'title' : t, 'str' : s, 'end' : e}
 
     if(time not in day):
         day.append(time)

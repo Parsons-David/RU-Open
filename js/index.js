@@ -68,7 +68,7 @@ class Campus{
 }
 
 class Building{
-  constructor(name, room, uniqueID){
+  constructor(name, rooms, uniqueID){
     // Building Name (Hill Center, Loree, etc)
     this.name = name;
     // Is Building included in search
@@ -84,13 +84,16 @@ class Building{
     // Div for Buildings on Campus
     this.div = document.createElement("div");
     this.div.style.display = 'none';
+    // this.div.style.height = "300px";
 
-    for(var r in room){
-      var newID = uniqueID + ' - ' + r;
-      $("body").data(newID, new Room(r, room[r], newID))
-      this.div.append($("body").data(newID).sec);
-      this.div.append($("body").data(newID).div);
-    }
+    drawBuildingTimeline(this.div, rooms);
+
+    // for(var r in rooms){
+    //   var newID = uniqueID + ' - ' + r;
+    //   $("body").data(newID, new Room(r, rooms[r], newID))
+    //   this.div.append($("body").data(newID).sec);
+    //   this.div.append($("body").data(newID).div);
+    // }
   }
 
   toggleSelected(){
