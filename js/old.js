@@ -4,10 +4,10 @@ var day;
 
 function onLoad(){
   console.log("Loading");
-  $.getJSON('summer2017data.json', function(data) {
+  $.getJSON('http://parsonssoftware.me/RU-Open/summer2017data.json', function(data) {
         index = new Page(data);
   });
-  $("*").css( 'cursor', 'pointer' );
+  // $("*").css( 'cursor', 'pointer' );
   day = week[(new Date()).getDay()];
   console.log(day);
 }
@@ -24,8 +24,8 @@ class Page{
 
     for(var k in this.json){
       $("body").data(k, new Campus(k, this.json[k]));
-      document.getElementById("body").append($("body").data(k).sec);
-      document.getElementById("body").append($("body").data(k).div);
+      document.getElementById("body").appendChild($("body").data(k).sec);
+      document.getElementById("body").appendChild($("body").data(k).div);
       console.log(k + " -> " + this.json[k]);
     }
 
@@ -49,12 +49,13 @@ class Campus{
     // Div for Buildings on Campus
     this.div = document.createElement("div");
     this.div.style.display = 'none';
+    this.div.style.width = "800px";
 
     for(var b in buildings){
       var newID = name + ' - ' + b
       $("body").data(newID, new Building(b, buildings[b], newID))
-      this.div.append($("body").data(newID).sec);
-      this.div.append($("body").data(newID).div);
+      this.div.appendChild($("body").data(newID).sec);
+      this.div.appendChild($("body").data(newID).div);
     }
 
   }
@@ -84,16 +85,16 @@ class Building{
     // Div for Buildings on Campus
     this.div = document.createElement("div");
     this.div.style.display = 'none';
+    this.div.style.width = "800px";
     // this.div.style.height = "300px";
+
+    var ndiv = document.createElement("div");
+    ndiv.style.width = "800px";
 
     drawBuildingTimeline(this.div, rooms);
 
-    // for(var r in rooms){
-    //   var newID = uniqueID + ' - ' + r;
-    //   $("body").data(newID, new Room(r, rooms[r], newID))
-    //   this.div.append($("body").data(newID).sec);
-    //   this.div.append($("body").data(newID).div);
-    // }
+    document.getElementById("body").appendChild(this.div);
+
   }
 
   toggleSelected(){

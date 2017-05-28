@@ -1,5 +1,7 @@
 google.charts.load("current", {packages:["timeline"]});
+var week = ['SUN', 'M', 'T', 'W', 'TH', 'F', 'S'];
 function drawBuildingTimeline(container, rooms) {
+  day = [(new Date()).getDay()];
 
   var chart = new google.visualization.Timeline(container);
   var dataTable = new google.visualization.DataTable();
@@ -17,7 +19,7 @@ function drawBuildingTimeline(container, rooms) {
 
     // console.log(rooms[r]['M']);
 
-    times = rooms[r]['M'];
+    times = rooms[r][day];
 
     console.log(times);
 
@@ -40,11 +42,16 @@ function drawBuildingTimeline(container, rooms) {
     }
   }
 
+
   var options = {
     timeline: { singleColor: '#8d8' },
+    width: 800,
+    // height: 600,
+    // chartArea: {  width: "50%", height: "70%" }
   };
 
   if(noTable){
+    container.innerHTML = "No Classes Scheduled Today";
     return;
   }
 
