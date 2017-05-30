@@ -1,17 +1,17 @@
 var index;
-var day;
+var week = ['SUN', 'M', 'T', 'W', 'TH', 'F', 'S'];
 // var json;
 
 function onLoad(){
   console.log("Loading");
   $.getJSON('summer2017data.json', function(data) {
-        createTimelines(data);
+        createTimelines(data, week[(new Date()).getDay()]);
   });
 }
 
-function createTimelines(json){
+function createTimelines(json, day){
   // $("*").css( 'cursor', 'pointer' );
-  day = [(new Date()).getDay()];
+    console.log(day);
 
   for(campus in json){
 
@@ -29,7 +29,7 @@ function createTimelines(json){
       var div = document.createElement('div');
       div.id = campus + ' - ' + building;
       document.getElementById("body").append(div);
-      drawBuildingTimeline(div, json[campus][building]);
+      drawBuildingTimeline(div, json[campus][building], day);
     }
   }
 }

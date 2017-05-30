@@ -1,7 +1,6 @@
 google.charts.load("current", {packages:["timeline"]});
-var week = ['SUN', 'M', 'T', 'W', 'TH', 'F', 'S'];
-function drawBuildingTimeline(container, rooms) {
-  day = [(new Date()).getDay()];
+
+function drawBuildingTimeline(container, rooms, day) {
 
   var chart = new google.visualization.Timeline(container);
   var dataTable = new google.visualization.DataTable();
