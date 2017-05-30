@@ -20,7 +20,7 @@ function drawBuildingTimeline(container, rooms, day) {
 
     times = rooms[r][day];
 
-    console.log(times);
+    // console.log(times);
 
     // return;
 
@@ -28,7 +28,7 @@ function drawBuildingTimeline(container, rooms, day) {
 
       var t = times[key];
 
-      console.log(key + " -> " + t);
+      // console.log(key + " -> " + t);
 
       var start = timeStringToDate(t['str']);
       var end = timeStringToDate(t['end']);
@@ -58,7 +58,7 @@ function drawBuildingTimeline(container, rooms, day) {
 }
 
 function timeStringToDate(str) {
-  console.log(str);
+  // console.log(str);
   var h = String(str).substring(0,2);
   var m = String(str).substring(2, 4);
   return new Date(0, 0, 0, parseInt(h), parseInt(m), 0);
