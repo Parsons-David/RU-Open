@@ -1,4 +1,5 @@
 google.charts.load("current", {packages:["timeline"]});
+var weekInts = {'U' : 0, 'M' : 1, 'T' : 2, 'W' : 3, 'TH' : 4, 'F' : 5, 'S' : 6};
 
 function drawBuildingTimeline(container, rooms, day) {
 
@@ -18,7 +19,9 @@ function drawBuildingTimeline(container, rooms, day) {
 
     // console.log(rooms[r]['M']);
 
-    times = rooms[r][day];
+    times = rooms[r][weekInts[day]];
+
+    // console.log(weekInts[day]);
 
     // console.log(times);
 
@@ -43,8 +46,8 @@ function drawBuildingTimeline(container, rooms, day) {
 
 
   var options = {
-    timeline: { singleColor: '#8d8' },
     width: 800,
+    // timeline: { colorByRowLabel: true }
     // height: 600,
     // chartArea: {  width: "50%", height: "70%" }
   };

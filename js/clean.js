@@ -1,5 +1,5 @@
 var index;
-var week = ['SUN', 'M', 'T', 'W', 'TH', 'F', 'S'];
+var week = ['U', 'M', 'T', 'W', 'TH', 'F', 'S'];
 var currentDay;
 var semesterData;
 
@@ -18,15 +18,15 @@ function selectDay(id){
 
 function createTimelines(json, day){
   // $("*").css( 'cursor', 'pointer' );
-  // console.log(day);
+  console.log(day);
 
-  for(campus in json){
+  for(var campus in json){
 
     var campHead = document.createElement("h2");
     campHead.innerHTML = campus;
     document.getElementById("divTimelines").append(campHead);
 
-    for(building in json[campus]){
+    for(var building in json[campus]){
 
       var buildHead = document.createElement("h4");
       buildHead.innerHTML = building;
