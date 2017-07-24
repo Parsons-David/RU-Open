@@ -1,16 +1,21 @@
 from django.shortcuts import render
 
+nicknames = {
+    'livingston' : 'Livingston',
+    'livi' : 'Livingston',
+    'busch' : 'Busch',
+    'college_avenue' : 'College Avenue',
+    'college_ave' : 'College Avenue',
+    'cook' : 'Cook/Douglass',
+    'douglass' : 'Cook/Douglass',
+    'cook_douglass' : 'Cook/Douglass',
+}
+
 def index(request):
     return render(request, 'website/home.html', context={'nbar' : 'home'})
 
-def livingston(request):
-    return render(request, 'website/livingston.html', context={'nbar' : 'livingston'})
+def campus(request, **kwargs):
 
-def busch(request):
-    return render(request, 'website/busch.html', context={'nbar' : 'busch'})
+    camp = nicknames.get(kwargs.get('name', None), 'Rutger')
 
-def college_avenue(request):
-    return render(request, 'website/college_avenue.html', context={'nbar' : 'college_avenue'})
-
-def cook_douglass(request):
-    return render(request, 'website/cook_douglass.html', context={'nbar' : 'cook_douglass'})
+    return render(request, 'website/campus.html', context={'nbar' : camp, 'campus_name' : camp})

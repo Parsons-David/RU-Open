@@ -19,12 +19,13 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^livingston/$', views.livingston, name='livingston'),
-    url(r'^livi/$', views.livingston, name='livingston'),
-    url(r'^busch/$', views.busch, name='busch'),
-    url(r'^college_avenue/$', views.college_avenue, name='college_avenue'),
-    url(r'^college_ave/$', views.college_avenue, name='college_avenue'),
-    url(r'^cook/$', views.cook_douglass, name='cook_douglass'),
-    url(r'^douglass/$', views.cook_douglass, name='cook_douglass'),
-    url(r'^cook_douglass/$', views.cook_douglass, name='cook_douglass'),
+    url(r'^(?P<name>.*)/$', views.campus, name='campus'),
+    # url(r'^livingston/$', views.livingston, name='livingston'),
+    # url(r'^livi/$', views.livingston, name='livingston'),
+    # url(r'^busch/$', views.busch, name='busch'),
+    # url(r'^college_avenue/$', views.college_avenue, name='college_avenue'),
+    # url(r'^college_ave/$', views.college_avenue, name='college_avenue'),
+    # url(r'^cook/$', views.cook_douglass, name='cook_douglass'),
+    # url(r'^douglass/$', views.cook_douglass, name='cook_douglass'),
+    # url(r'^cook_douglass/$', views.cook_douglass, name='cook_douglass'),
 ]
