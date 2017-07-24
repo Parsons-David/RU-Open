@@ -5,7 +5,7 @@ var semesterData;
 
 function onLoad(){
   console.log("Loading");
-  $.getJSON('assets/json/summer2017data.json', function(data) {
+  $.getJSON('http://davidparsons.io/RU-Open/assets/json/summer2017data.json', function(data) {
     semesterData = data;
     createTimelines(semesterData, week[(new Date()).getDay()]);
   });

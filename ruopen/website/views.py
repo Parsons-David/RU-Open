@@ -4,11 +4,11 @@ nicknames = {
     'livingston' : 'Livingston',
     'livi' : 'Livingston',
     'busch' : 'Busch',
-    'college_avenue' : 'College Avenue',
-    'college_ave' : 'College Avenue',
-    'cook' : 'Cook/Douglass',
-    'douglass' : 'Cook/Douglass',
-    'cook_douglass' : 'Cook/Douglass',
+    'college_avenue' : 'College-Avenue',
+    'college_ave' : 'College-Avenue',
+    'cook' : 'Cook-Douglass',
+    'douglass' : 'Cook-Douglass',
+    'cook_douglass' : 'Cook-Douglass',
 }
 
 def index(request):

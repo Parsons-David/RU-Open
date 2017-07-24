@@ -1,6 +1,13 @@
 {% extends "website/header.html" %}
-
+{% block scripts %}
+<script>
+  $( "body" ).data( "foo", 52 );
+</script>
+{% endblock %}
 {% block content %}
-<p>The {{ campus_name }} campus timelines will go here</p>
-<div id="timelines"></div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div id="{{ campus_name }}"></div>
 {% endblock %}
