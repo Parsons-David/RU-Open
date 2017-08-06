@@ -30,7 +30,7 @@ else:
     SECRET_KEY = os.environ['SECRET_KEY']
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.201.112.32']
 
 # Application definition
 
@@ -135,4 +135,4 @@ SECURE_BROWSER_XSS_FILTER = True
 
 SESSION_COOKIE_SECURE = True
 
-X_FRAME_OPTIONS = DENY
+X_FRAME_OPTIONS = 'DENY'
