@@ -1,4 +1,4 @@
 *.log
 *.pyc
 *.idea/
-*secrets.py
+etc/
