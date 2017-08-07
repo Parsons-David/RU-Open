@@ -34,6 +34,7 @@ else:
     SECURE_BROWSER_XSS_FILTER = True
     SESSION_COOKIE_SECURE = True
     X_FRAME_OPTIONS = 'DENY'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 ALLOWED_HOSTS = ['34.201.112.32']
