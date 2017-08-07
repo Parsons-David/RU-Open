@@ -28,6 +28,12 @@ if DEBUG:
 # Running in Production or Staging
 else:
     SECRET_KEY = os.environ['SECRET_KEY']
+    # Security Settings for Production
+    SECURE_HSTS_SECONDS = 0
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
 
 
 ALLOWED_HOSTS = ['34.201.112.32']
@@ -123,16 +129,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# Security Settings for Production
-
-SECURE_HSTS_SECONDS = 0
-
-SECURE_CONTENT_TYPE_NOSNIFF = True
-
-SECURE_BROWSER_XSS_FILTER = True
-
-SESSION_COOKIE_SECURE = True
-
-X_FRAME_OPTIONS = 'DENY'
