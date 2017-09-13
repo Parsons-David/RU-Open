@@ -1,9 +1,11 @@
 # RU-Open
 
-Website that displays open statuses for Rutgers University Classrooms.
+* Dynamic Website for finding open classrooms at Rutgers University
+* Uses Google Charts to provide a interactive and intuitive interface
+* Pulls data from the Rutgers Course API
+* Written as a Django app using Python, Javascript, jQuery, HTML, and Bootstrap.
 
-Statues based off Rutgers University Schedule of Classes (SOC) Data.
+Status based off Rutgers University Schedule of Classes (SOC) Data  
+See: [Rutgers Course API](https://github.com/Parsons-David/Rutgers-Course-API)
 
-Created using: HTML, Javascript, Python, JQuery.
-
-[Live Website](http://parsonssoftware.me/RU-Open/)
+[Live Site](http://davidparsons.io/RU-Open/)
