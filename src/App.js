@@ -6,9 +6,31 @@ import { Chart } from 'react-google-charts';
 class App extends Component {
   constructor(props){
     super(props);
+    var s_days = [
+      'U',
+      'M',
+      'T',
+      'W',
+      'TH',
+      'F',
+      'S'
+    ]
+    var days = {
+      "U" : "Sunday",
+      "M" : "Monday",
+      "T" : "Tuesday",
+      "W" : "Wednesday",
+      "TH" : "Thursday",
+      "F" : "Friday",
+      "S" : "Saturday"
+    }
+
+    var d = new Date();
+    var today = s_days[d.getDay()];
+
     this.state = {
-      day : 'M',
-      display_day : 'Monday'
+      day : today,
+      display_day : days[today]
     }
   }
   changeDay(new_day){
@@ -40,6 +62,7 @@ class App extends Component {
           <button onClick={()=>this.changeDay("F")}>Friday</button>
           <button onClick={()=>this.changeDay("S")}>Saturday</button>
         </div>
+        <br/>
         <hr/>
         <Timeline day={this.state.day}/>
       </div>
