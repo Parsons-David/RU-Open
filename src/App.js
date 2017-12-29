@@ -4,10 +4,44 @@ import times_json from './12018_NB_U.json'
 import { Chart } from 'react-google-charts';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      day : 'M',
+      display_day : 'Monday'
+    }
+  }
+  changeDay(new_day){
+    var days = {
+      "U" : "Sunday",
+      "M" : "Monday",
+      "T" : "Tuesday",
+      "W" : "Wednesday",
+      "TH" : "Thursday",
+      "F" : "Friday",
+      "S" : "Saturday"
+    }
+    this.setState({
+      day:new_day,
+      display_day: days[new_day]
+    })
+  }
   render() {
+    console.log("Rendering: " + this.state.day);
     return (
       <div>
-      <Timeline/>
+        <h1>Rutgers University Spring 2018 {this.state.display_day} Classes</h1>
+        <div className="days">
+          <button onClick={()=>this.changeDay("U")}>Sunday</button>
+          <button onClick={()=>this.changeDay("M")}>Monday</button>
+          <button onClick={()=>this.changeDay("T")}>Tuesday</button>
+          <button onClick={()=>this.changeDay("W")}>Wednesday</button>
+          <button onClick={()=>this.changeDay("TH")}>Thursday</button>
+          <button onClick={()=>this.changeDay("F")}>Friday</button>
+          <button onClick={()=>this.changeDay("S")}>Saturday</button>
+        </div>
+        <hr/>
+        <Timeline day={this.state.day}/>
       </div>
     );
   }
@@ -21,27 +55,20 @@ class App extends Component {
 // }
 
 class Timeline extends Component {
-  constructor(props){
-    super(props);
-    var today_times = times_json['times']['M'];
+  render(){
+    var today_times = times_json['times'][this.props.day];
     var times = [];
     for(var i = 0; i < today_times.length; i++){
       var time_json = today_times[i];
-      var new_time = [time_json['room'], time_json['course_name']];
-      new_time.push(new Date(0, 0, 0, parseInt(time_json['start'].split(':')[0], 10), parseInt(time_json['start'].split(':')[1], 10), 0));
-      new_time.push(new Date(0, 0, 0, parseInt(time_json['end'].split(':')[0], 10), parseInt(time_json['end'].split(':')[1], 10), 0));
+      // console.log(time_json[2].split(':'));
+      var new_time = [time_json[0], time_json[1]];
+      new_time.push(new Date(0, 0, 0, parseInt(time_json[2].split(':')[0], 10), parseInt(time_json[2].split(':')[1], 10), 0));
+      new_time.push(new Date(0, 0, 0, parseInt(time_json[3].split(':')[0], 10), parseInt(time_json[3].split(':')[1], 10), 0));
       times.push(new_time);
     }
     console.log(times);
-    this.state = {
-      rowData : times
-    }
-  }
-  render(){
     return(
       <div>
-        <h1>Rutgers University Spring 2018 Monday Classes</h1>
-        <p>Work in progress....</p>
         <Chart
         chartType = "Timeline"
         columns = {[
@@ -50,7 +77,7 @@ class Timeline extends Component {
           {"id":"Start","type":"date"},
           {"id":"End","type":"date"}
         ]}
-        rows= {this.state.rowData}
+        rows={times}
         options = {{
           timeline:{
             colorByRowLabel:true,
